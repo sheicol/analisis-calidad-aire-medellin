@@ -123,18 +123,6 @@ plt.tight_layout()
 plt.show()
 
 
-'''Con esto ya tienes una primera exploración y visualización del comportamiento de la calidad del aire.
-
-✅ ¿Siguiente paso?
-Podemos ahora:
-
--Filtrar por años o municipios específicos
-
--Comparar valores entre estaciones
-
--Crear un mini dashboard con Plotly o Dash
-
-¿Quieres avanzar hacia un dashboard interactivo básico o agregar más visualizaciones antes de eso?'''
 
 
 
