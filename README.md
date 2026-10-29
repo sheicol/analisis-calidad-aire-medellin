@@ -1,56 +1,41 @@
-# Análisis de la Calidad del Aire en Medellín 🇨🇴
+# Calidad del aire en Medellín — análisis con Python
 
-Este proyecto explora la calidad del aire en Medellín usando datos abiertos y herramientas de análisis en Python. Fue realizado como parte del aprendizaje en mi primer semestre de la carrera de Ciencia de Datos.
+Análisis exploratorio de registros publicados en Datos Abiertos Colombia. El script filtra explícitamente el municipio y genera un resumen de cobertura. **Esta revisión corrige el método; los resultados actualizados requieren ejecutar la descarga.**
 
----
+## Reproducir
 
-## 🔍 Objetivo
+```bash
+python -m pip install -r requirements.txt
+python analisis_calidad_aire_COL.py --municipio Medellín --out outputs
+```
 
-Analizar las mediciones de diferentes contaminantes (como PM2.5, PM10, etc.) en varias estaciones de monitoreo de la ciudad para identificar patrones, extremos y promedios anuales.
+Para trabajar con una descarga local de la misma fuente:
 
----
+```bash
+python analisis_calidad_aire_COL.py --input datos_originales.csv --out outputs
+```
 
-## 📊 Tecnologías usadas
+## Fuente y alcance
 
-- Python 🐍
-- Pandas
-- Matplotlib & Seaborn
-- API de datos abiertos proporcionados por el Gobierno de Colombia
-- Visual Studio Code
+[API de origen](https://www.datos.gov.co/resource/kekd-7v7h.json). La descarga recorre páginas ordenadas por identificador. La API es mutable: conservar el CSV de entrada es necesario para reproducir una ejecución exacta.
 
----
+El script valida columnas, normaliza el nombre del municipio, convierte promedio y año a números y excluye registros sin campos críticos. Si no hay registros válidos de Medellín, falla explícitamente. La cobertura temporal y la cantidad de registros se calculan al ejecutar; no se presuponen.
 
-## 📈 Principales visualizaciones
+## Archivos generados
 
-- Gráfico de barras con el promedio por contaminante
-- Boxplots mostrando la distribución de valores
-- Comparación de contaminantes por estación
+- `outputs/datos_filtrados.csv`: registros válidos del municipio.
+- `outputs/cobertura.json`: fuente, fecha de ejecución, filas y años.
+- `outputs/resumen.csv`: promedio de registros por contaminante, unidad y estación.
+- `outputs/contaminante_*.png`: gráficos separados por contaminante y unidad.
 
----
+No existe un notebook en esta entrega: el código es `analisis_calidad_aire_COL.py`.
 
-## 📁 Archivos del repositorio
+## Limitaciones
 
-- `calidad_aire_medellin.ipynb`: Notebook con el análisis completo
-- `README.md`: descripción del proyecto
-- `*.png`: visualizaciones exportadas para presentación
+Los registros pueden resumir periodos y coberturas diferentes. El promedio simple de valores publicados no equivale a exposición de la población ni a un promedio anual ponderado. No se combinan unidades distintas ni se evalúa cumplimiento normativo.
 
----
+Los tres PNG históricos en la raíz fueron generados por la versión anterior, sin filtro municipal explícito; no deben interpretarse como resultados validados de Medellín. Los nuevos resultados se guardan en `outputs/`.
 
-## 💡 Aprendizajes personales
+## Portafolio
 
-Este es mi primer proyecto aplicado de análisis de datos. Aprendí a conectarme a una API pública, limpiar un conjunto de datos real, visualizar y sacar conclusiones que pueden aportar a la sostenibilidad urbana.
-
----
-
-## 🚀 Futuras mejoras
-
-- Crear un dashboard interactivo con Plotly o Dash
-- Agregar mapas con Folium para geolocalizar estaciones
-- Explorar series de tiempo por años
-
----
-
-## 📬 Contacto
-
-Si quieres colaborar o tienes sugerencias, puedes escribirme por [LinkedIn](https://www.linkedin.com/in/sheilyn-colina-54b09097/) 😊
-
+[IBKR Portfolio Analytics](https://github.com/sheicol/ibkr-quant-portfolio-analysis) · [SheyQuant Research Lab](https://github.com/sheicol/quant-research-portfolio)
